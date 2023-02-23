@@ -18,26 +18,41 @@ import SideMenu from "react-native-side-menu-updated";
 import Feather from "@expo/vector-icons/Feather";
 import ProgressWebView from "../../components/shared/ProgressWebView";
 import Colors from "../../constants/Colors";
+import fechRequest from "../../utils/fechRequest";
 
 const ChaptersScreen = (props) => {
     let url = `/chapters/${props.route.params.id}`
-    const [chapterUrl, setChapterUrl] = useState()
-    const [webUrl, setWebUrl] = useState(`http://10.0.0.21:5173/show_chapter/${props.route.params.id}`)
-    const [isOpen, setIsOpen] = useState(false);
     const {data, loading, error, onReload, refreshing, onRefresh, fetchData} = useFetchData(url, {
         chapter: {},
         chapters: []
     });
+    const [chapterUrl, setChapterUrl] = useState()
+    const [webUrl, setWebUrl] = useState(`https://react.serein-jf.co/show_chapter/${props.route.params.id}`)
+    const [isOpen, setIsOpen] = useState(false);
+    const courseId = data?.chapter?.courseId
+    const chapterId = props?.route?.params?.id
+
+
     // 展开左侧菜单
     const updateMenuState = menuState => {
         setIsOpen(menuState);
     };
 
+    const history = async () => {
+        await fechRequest(`/histories`, "POST", {
+            courseId,
+            chapterId
+        })
+    }
+
+    useEffect(() => {
+        history().then()
+    }, [])
 
     // 切换选择
     const onItemSelected = item => {
         setIsOpen(false);
-        setWebUrl(`http://10.0.0.21:5173/show_chapter/${item}`)
+        setWebUrl(`https://react.serein-jf.co/show_chapter/${item}`)
         url = `/chapters/${item}`
         fetchData(url).then()
     };
@@ -55,8 +70,8 @@ const ChaptersScreen = (props) => {
         return <NetworkError onReload={() => onReload(url)}/>;
     }
 
-    return (
 
+    return (
         <View style={styles.container}>
             <SideMenu
                 menu={menu}
@@ -83,8 +98,8 @@ const ChaptersScreen = (props) => {
                                 <Feather name="chevron-down" size={18} color='black'/>}
                             <Text style={styles.courseText}>课程列表</Text>
                         </View>
-
                     </TouchableWithoutFeedback>
+
                     <View style={styles.line}></View>
                     <SafeAreaView style={{flex: 1}}>
                         <WebView

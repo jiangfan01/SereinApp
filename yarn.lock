@@ -1718,15 +1718,15 @@
   resolved "https://registry.npmmirror.com/@react-native-community/slider/-/slider-4.2.4.tgz#8d88adceeb32f7997a122feba48d7186fca80346"
   integrity sha512-uY51UoipQW4ELnFWMU6rTHRc4EUYaW+Z1O9Teijej6NYVYdUcUKq+t7WeBGjMAEc1ipyooMeBqRXToWO5zAU2Q==
 
-"@react-native-community/viewpager@3.3.0":
-  version "3.3.0"
-  resolved "https://registry.npmmirror.com/@react-native-community/viewpager/-/viewpager-3.3.0.tgz#e613747a43a31a6f3278f817ba96fdaaa7941f23"
-  integrity sha512-tyzh79l4t/hxiyS9QD3LRmWMs8KVkZzjrkQ8U8+8To1wmvVCBtp8BenvNsDLTBO7CpO/YmiThpmIdEZMr1WuVw==
-
 "@react-native-community/viewpager@^2.0.1":
   version "2.0.2"
   resolved "https://registry.npmmirror.com/@react-native-community/viewpager/-/viewpager-2.0.2.tgz#622b190294b1310c4825c98daeaee1c8443f7124"
   integrity sha512-CKVhIZdX/Cmb80muog8sKpi5vM8npwFp4tx4Dj1IvTBidZweuO22+VH2rDOj7E0LzdV9IYRJ4FGBwcPBD2qUrQ==
+
+"@react-native-segmented-control/segmented-control@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.npmmirror.com/@react-native-segmented-control/segmented-control/-/segmented-control-2.4.0.tgz#0a88f22ad2c0fe07ecc002ee1e5d62c55a3dd0ae"
+  integrity sha512-2s1AaT6xk/Do5s6u7ioCXucqesAt02NQlLKBOM28dJWI7PTH9o89x6AwsGHIeMkTe4nQ6iENiJKzO7Y3SGG9Ew==
 
 "@react-native/assets@1.0.0":
   version "1.0.0"
@@ -2571,23 +2571,23 @@ clone@^2.1.2:
   resolved "https://registry.npmmirror.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
   integrity sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==
 
+clwy-expo-scrollable-tab-view@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.npmmirror.com/clwy-expo-scrollable-tab-view/-/clwy-expo-scrollable-tab-view-1.0.9.tgz#ee3d0cb23962f8ca65a141730137e4177f57c410"
+  integrity sha512-Su5Sv4tXBvSITU1QagF+7nd+HgzUu/wcdrBNtRRYDkpDYc13HQRH08fJeDTuudi/1VI8UQIitAz9UuanDDl+8Q==
+  dependencies:
+    create-react-class "^15.6.2"
+    deprecated-react-native-prop-types "^2.3.0"
+    prop-types "^15.6.0"
+    react-native-pager-view "^6.0.1"
+    react-timer-mixin "^0.13.3"
+
 clwy-expo-video-player@^2.2.1:
   version "2.2.1"
   resolved "https://registry.npmmirror.com/clwy-expo-video-player/-/clwy-expo-video-player-2.2.1.tgz#64337045f8108a57f85585c4db69f9aefe1338ff"
   integrity sha512-HAl55h1zYrOjLmIGPmP2RDvMm5KlKWbSB1+j3tLVGDDZUCnj38bgworvK0R0yb5AJaUQMavzhh7jnuGQomPE8w==
   dependencies:
     tslib "^2.4.0"
-
-clwy-react-native-scrollable-tab-view@^1.0.10:
-  version "1.0.10"
-  resolved "https://registry.npmmirror.com/clwy-react-native-scrollable-tab-view/-/clwy-react-native-scrollable-tab-view-1.0.10.tgz#498c300d3cbeca153d9708ca4ffc3b5b3d0fb0cf"
-  integrity sha512-toldFNUR9iKDMRjhKUSd60hminmCRi5kyUoSgWBQ3ymGcJPkuK1IsByKEdrAo1GwOeJLddU0UWlolXp9+nNhcA==
-  dependencies:
-    "@react-native-community/viewpager" "3.3.0"
-    create-react-class "^15.6.2"
-    deprecated-react-native-prop-types "^2.3.0"
-    prop-types "^15.6.0"
-    react-timer-mixin "^0.13.3"
 
 collection-visit@^1.0.0:
   version "1.0.0"
@@ -5472,6 +5472,11 @@ react-freeze@^1.0.0:
   resolved "https://registry.npmmirror.com/react-freeze/-/react-freeze-1.0.3.tgz#5e3ca90e682fed1d73a7cb50c2c7402b3e85618d"
   integrity sha512-ZnXwLQnGzrDpHBHiC56TXFXvmolPeMjTn1UOm610M4EXGzbEDR7oOIyS2ZiItgbs6eZc4oU/a0hpk8PrcKvv5g==
 
+react-hook-form@^7.43.1:
+  version "7.43.1"
+  resolved "https://registry.npmmirror.com/react-hook-form/-/react-hook-form-7.43.1.tgz#0d0d7822f3f7fc05ffc41d5f012b49b90fcfa0f0"
+  integrity sha512-+s3+s8LLytRMriwwuSqeLStVjRXFGxgjjx2jED7Z+wz1J/88vpxieRQGvJVvzrzVxshZ0BRuocFERb779m2kNg==
+
 "react-is@^16.12.0 || ^17.0.0 || ^18.0.0":
   version "18.2.0"
   resolved "https://registry.npmmirror.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
@@ -5506,6 +5511,16 @@ react-native-gradle-plugin@^0.70.3:
   version "0.70.3"
   resolved "https://registry.npmmirror.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.70.3.tgz#cbcf0619cbfbddaa9128701aa2d7b4145f9c4fc8"
   integrity sha512-oOanj84fJEXUg9FoEAQomA8ISG+DVIrTZ3qF7m69VQUJyOGYyDZmPqKcjvRku4KXlEH6hWO9i4ACLzNBh8gC0A==
+
+react-native-pager-view@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.npmmirror.com/react-native-pager-view/-/react-native-pager-view-6.0.1.tgz#353abf38d3c2b91ed7c586f10af0f94700f5b1dc"
+  integrity sha512-kOVNu+4JnR3Gpykviy4WbOAnQz8TgP6O2pRvne221oPUDQLYrvEE/FINR0P85TxbMgvKTPlLejGw0ZHQbezK/g==
+
+react-native-pager-view@^6.0.1:
+  version "6.1.4"
+  resolved "https://registry.npmmirror.com/react-native-pager-view/-/react-native-pager-view-6.1.4.tgz#3a63ebd1b72f81991157ea552bb9c887e529bc8c"
+  integrity sha512-fmTwgGwPxGCBusKAq7gHzm+s1Yp0qh5rKPoQszaCuxrb+76KgK4Qe82jJNPUp2xTZOKSw+FbJU2QahF8ncTl+w==
 
 react-native-safe-area-context@4.4.1:
   version "4.4.1"

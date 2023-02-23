@@ -60,7 +60,6 @@ const HomeScreen = ({navigation}) => {
         if (isEnd) {
             return
         }
-
         currentPage++
         setMoreLoading(true)
         get(`${url}?currentPage=${currentPage}`).then(res => {

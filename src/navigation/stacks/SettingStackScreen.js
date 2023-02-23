@@ -21,8 +21,8 @@ const SettingStackScreen = () => {
                     title: "设置",
                     ...ModalOption(navigation),
                 })}/>
-            <SettingStack.Screen name="Details" options={({navigation,route}) => ({
-                title:"关于「长乐未央」"
+            <SettingStack.Screen name="Details" options={({navigation, route}) => ({
+                title: "关于「长乐未央」"
             })} component={DetailsScreen}/>
             <SettingStack.Screen name="Site" component={Site}/>
         </SettingStack.Navigator>

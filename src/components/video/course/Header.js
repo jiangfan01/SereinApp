@@ -1,23 +1,55 @@
-import {Image, Share, StyleSheet, TouchableOpacity, View} from "react-native";
+import {Alert, Image, Share, StyleSheet, TouchableOpacity, View} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {EvilIcons} from "@expo/vector-icons";
+import fechRequest from "../../../utils/fechRequest";
+import React, {useEffect, useState} from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Header = (props) => {
     const image = props?.data?.image
+    const userId = props?.data?.userId
+    const courseId = props?.data?.id
+    const id = props.courseId
+    const [isLike, setIsLike] = useState(Boolean)
+    const url = `/users/liked?courseId=${id}`
+    const [token, setToken] = useState("")
+
+    const getToken = async () => {
+        setToken(await AsyncStorage.getItem("token"))
+    }
 
     const onShare = async () => {
         const content = {
-            message: '分享的消息',
-
+            message: props?.data?.title,
             // iOS URL
             url: 'https://clwy.cn',
-
             // Android 消息标题
-            title: '分享的标题',
+            title: props?.data?.title,
         };
-
         await Share.share(content);
     };
+
+    const getLiked = async () => {
+        const res = await fechRequest(url, "GET")
+        setIsLike(res.liked)
+    }
+
+    const onLike = async () => {
+        if (!token) {
+            Alert.alert('暂未登录', '请先登录', [
+                {text: '好的',},
+            ]);
+        } else {
+            await fechRequest(`/likes`, "POST", {
+                userId, courseId
+            })
+            setIsLike(!isLike)
+        }
+    }
+
+    useEffect(() => {
+        getLiked().then()
+        getToken().then()
+    }, [])
 
     return (
         <>
@@ -37,11 +69,23 @@ const Header = (props) => {
                     </TouchableOpacity>
 
                     <View style={styles.icons}>
-                        <Ionicons
-                            name="ios-heart-outline"
-                            size={24} color="gray"
-                            style={styles.iconFlex}
-                        />
+                        <TouchableOpacity
+                            onPress={onLike}>
+                            {isLike ?
+                                <Ionicons
+                                    name="ios-heart-outline"
+                                    size={24} color="pink"
+                                    style={styles.iconFlex}
+                                />
+                                :
+                                <Ionicons
+                                    name="ios-heart-outline"
+                                    size={24} color="gray"
+                                    style={styles.iconFlex}
+                                />
+                            }
+
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>

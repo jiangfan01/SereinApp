@@ -16,7 +16,10 @@ const SearchStackScreen = () => {
                 title:"搜索",
                 ...ModalOption(navigation),
             })} name="Home" component={HomeScreen}/>
-            <SearchStack.Screen name="Results" component={ResultsScreen}/>
+            <SearchStack.Screen name="Results" component={ResultsScreen} options={({navigation,route}) => ({
+                title:"搜索结果",
+                ...ModalOption(navigation),
+            })}/>
         </SearchStack.Navigator>
     );
 };

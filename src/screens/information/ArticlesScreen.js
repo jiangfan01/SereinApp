@@ -4,7 +4,7 @@ import {WebView} from "react-native-webview";
 import {useState} from "react";
 
 const HomeScreen = ({route}) => {
-    const [webUrl, setWebUrl] = useState(`http://10.0.0.21:5173/show_article/${route?.params?.id}`)
+    const [webUrl, setWebUrl] = useState(`https://react.serein-jf.co/show_article/${route?.params?.id}`)
     return <WebView
         source={{uri: webUrl}}
     />;

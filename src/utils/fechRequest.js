@@ -3,7 +3,6 @@ import Api from '../constants/Api';
 
 const Request = async (url, method = "GET", params) => {
     const token = await AsyncStorage.getItem('token');
-
     /**
      * @newPromise 返回的是Promise，不是真正的值，真正的值要在then里面获取
      */
@@ -22,6 +21,7 @@ const Request = async (url, method = "GET", params) => {
                  */
                 body: params ? JSON.stringify(params) : "",
             })
+            console.log(312321, params)
             const responseJson = await response.json();
             resolve(responseJson.data);
         } catch (e) {
@@ -50,4 +50,4 @@ const post = async (url, params) => {
 }
 
 export default Request
-export {get,post}
+export {get, post}

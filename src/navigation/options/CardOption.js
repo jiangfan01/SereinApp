@@ -1,6 +1,6 @@
 import Colors from '../../constants/Colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Platform } from 'react-native';
+import {Platform} from 'react-native';
 
 //  Card Stack 配置
 const CardOption = (route, navigation) => ({
@@ -25,15 +25,23 @@ const CardOption = (route, navigation) => ({
     // 默认标题为空
     title: '',
 
+
+    ...Platform.select({
+        ios: {
+            headerLeft: () => (
+                <Ionicons
+                    name={Platform.OS === 'ios' ? 'ios-chevron-back' : 'md-arrow-back'}
+                    size={Platform.OS === 'ios' ? 30 : 25}
+                    color={Colors.primary}
+                    onPress={() => navigation.goBack()}
+                />
+            ),
+        },
+
+    })
+
     // 自定义返回按钮
-    headerLeft: () => (
-        <Ionicons
-            name={Platform.OS === 'ios' ? 'ios-chevron-back' : 'md-arrow-back'}
-            size={Platform.OS === 'ios' ? 30 : 25}
-            color={Colors.primary}
-            onPress={() => navigation.goBack()}
-        />
-    ),
+
 });
 
 export default CardOption;

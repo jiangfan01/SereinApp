@@ -1,6 +1,6 @@
 import React from 'react';
 import {RefreshControl, StyleSheet, Text, View} from 'react-native';
-import ScrollableTabView, {ScrollableTabBar} from 'clwy-react-native-scrollable-tab-view';
+import ScrollableTabView, {ScrollableTabBar} from 'clwy-expo-scrollable-tab-view';
 import Colors from '../../constants/Colors';
 import useFetchData from "../../hooks/useFetchData";
 import Loading from "../../components/shared/Loading";

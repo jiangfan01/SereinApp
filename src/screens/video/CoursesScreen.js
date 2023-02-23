@@ -1,10 +1,11 @@
-import {View, Text, Button, StyleSheet, ScrollView, Image, RefreshControl} from 'react-native';
+import {View , StyleSheet, ScrollView, RefreshControl} from 'react-native';
 import useFetchData from "../../hooks/useFetchData";
 import Content from "../../components/video/course/Content";
 import Header from "../../components/video/course/Header";
 import List from "../../components/video/course/List";
-import React from "react";
 import Teacher from "../../components/video/course/Teacher";
+import Loading from "../../components/shared/Loading";
+import NetworkError from "../../components/shared/NetworkError";
 
 const CoursesScreen = ({route}) => {
     const url = `/courses/${route.params.id}`;
@@ -12,13 +13,23 @@ const CoursesScreen = ({route}) => {
     const {data, loading, error, onReload, refreshing, onRefresh} = useFetchData(
         url,
     );
+
+
+    if (loading) {
+        return <Loading/>;
+    }
+    // 网络错误
+    if (error) {
+        return <NetworkError onReload={() => onReload(url)}/>;
+    }
+
     return (
         <ScrollView style={styles.box}
                     refreshControl={<RefreshControl
                         refreshing={refreshing}
                         onRefresh={() => onRefresh(url)}/>}>
             <View>
-                <Header data={data.course}/>
+                <Header data={data.course} courseId={data?.course?.id}/>
             </View>
             <Content data={data.course}/>
             <View style={styles.list}>

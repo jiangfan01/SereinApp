@@ -1,19 +1,24 @@
-import {View, Text, FlatList, RefreshControl, TouchableWithoutFeedback, Image, StyleSheet} from 'react-native';
-import useFetchData from "../../hooks/useFetchData";
-import Loading from "../../components/shared/Loading";
-import NetworkError from "../../components/shared/NetworkError";
+import useFetchData from "../../../hooks/useFetchData";
+import {
+    FlatList,
+    Image,
+    RefreshControl,
+    StyleSheet,
+    Text, TouchableWithoutFeedback,
+    View,
+} from "react-native";
+import Loading from "../../shared/Loading";
+import NetworkError from "../../shared/NetworkError";
+import Colors from "../../../constants/Colors";
 import {useNavigation} from "@react-navigation/native";
-import Colors from "../../constants/Colors";
-import NoData from "../../components/shared/NoData";
 
-const ResultsScreen = ({route}) => {
-    const searchParams = route?.params?.name
-    const url = `/courses?name=${searchParams}`
+const Liked = () => {
     const navigation = useNavigation()
-    console.log(searchParams, 11111)
-    const {data, loading, error, onReload, refreshing, onRefresh} = useFetchData(url
-        , {courses: {}}
+    const url = `/users/likes`
+    const {data, loading, error, onReload, refreshing, onRefresh} = useFetchData(
+        url, {courses: []}
     );
+    // 判断是否加载中
     if (loading) {
         return <Loading/>;
     }
@@ -21,10 +26,6 @@ const ResultsScreen = ({route}) => {
     // 网络错误
     if (error) {
         return <NetworkError onReload={() => onReload(url)}/>;
-    }
-
-    if (data.courses.length === 0) {
-        return <NoData/>
     }
 
     const renderItem = ({item, index}) => (
@@ -59,7 +60,8 @@ const ResultsScreen = ({route}) => {
             />
         </>
     )
-};
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -92,4 +94,4 @@ const styles = StyleSheet.create({
         color: '#b7b6b6'
     },
 });
-export default ResultsScreen;
+export default Liked

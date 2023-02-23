@@ -8,14 +8,14 @@ const List = (props) => {
     const ListItem = props?.data?.chapters.map(item => (
         <TouchableWithoutFeedback
             key={item.id}
-            onPress={() =>
+            onPress={() => {
                 navigation.navigate('ChapterStack', {
                     screen: "Chapters",
                     params: {
                         id: item.id,
                         title: item.title
                     }
-                })
+                })}
             }
         >
             <View style={[styles.item]}>
