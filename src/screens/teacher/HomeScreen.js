@@ -9,7 +9,6 @@ const HomeScreen = () => {
     const {data, loading, error, onReload, refreshing, onRefresh} = useFetchData(
         url, {user: {}}
     );
-    console.log(data, 21212)
 
     if (loading) {
         return <Loading/>;

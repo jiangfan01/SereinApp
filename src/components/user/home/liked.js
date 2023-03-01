@@ -11,6 +11,7 @@ import Loading from "../../shared/Loading";
 import NetworkError from "../../shared/NetworkError";
 import Colors from "../../../constants/Colors";
 import {useNavigation} from "@react-navigation/native";
+import NoData from "../../shared/NoData";
 
 const Liked = () => {
     const navigation = useNavigation()
@@ -22,10 +23,14 @@ const Liked = () => {
     if (loading) {
         return <Loading/>;
     }
-
+    console.log(3213, data.courses)
     // 网络错误
     if (error) {
         return <NetworkError onReload={() => onReload(url)}/>;
+    }
+
+    if (data.courses.length === 0) {
+        return <NoData/>
     }
 
     const renderItem = ({item, index}) => (
@@ -50,7 +55,7 @@ const Liked = () => {
         <>
             <FlatList
                 data={data.courses}
-                keyExtractor={item => item.id.toString()}
+                // keyExtractor={item => item.id.toString()}
                 renderItem={renderItem}
                 style={styles.container}
                 showsHorizontalScrollIndicator={false}

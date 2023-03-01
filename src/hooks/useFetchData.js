@@ -1,68 +1,95 @@
-import React, {useEffect, useState, useCallback} from "react";
-import {get} from "../utils/fechRequest";
+import React, {useCallback, useEffect, useReducer} from 'react';
+import fetchRequest from '../utils/fechRequest';
 
 /**
- * 不使用reducer
- * @param url
- * @param initData
- * @returns {{fetchData: ((function(*): Promise<void>)|*), data: *[], onRefresh: ((function(): Promise<void>)|*), refreshing: boolean, onReload: ((function(*): Promise<void>)|*), loading: boolean, error: boolean}}
+ * reducer方式统一管理
  */
+
+// 初始状态
+let initialState = {
+    loading: true,
+    error: false,
+    refreshing: false,
+    data: [],
+};
+
+// 定义reducer，统一管理状态
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'init':
+            return {
+                ...state,
+                loading: true,
+                error: false,
+                refreshing: false,
+            };
+        case 'refresh':
+            return {
+                ...state,
+                refreshing: true,
+            };
+        case 'success':
+            return {
+                ...state,
+                error: false,
+                data: action.payload,
+            };
+        case 'failure':
+            return {
+                ...state,
+                error: true,
+            };
+        case 'done':
+            return {
+                ...state,
+                loading: false,
+                refreshing: false,
+            };
+        default:
+            throw new Error();
+    }
+};
+
 const useFetchData = (url, initData) => {
     // 如果有传过来的initData，设置到initialState里
-    initData = {
+    initialState = {
+        ...initialState,
         data: initData || [],
     };
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    const [refreshing, setRefreshing] = React.useState(false);
-    const [data, setData] = useState([]);
 
-    /**
-     * 读取接口
-     * @try 读取成功后赋值并把url传给封装的get方法
-     * @catch  失败后传出Error
-     * @finally 无论成功失败都将loading取消
-     * @param url
-     * @returns {Promise<void>}
-     */
-    const fetchData = async (url,) => {
+    // 使用useReducer初始化数据
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    const fetchData = async url => {
         try {
-            const response = await get(url);
-            setData(response);
+            const responseJson = await fetchRequest(url);
+            dispatch({type: 'success', payload: responseJson});
         } catch (error) {
-            setError(true)
+            dispatch({type: 'failure'});
         } finally {
-            setLoading(false);
+            dispatch({type: 'done'});
         }
     };
 
-    /**
-     * 监听url，发生变化自动重新读接口
-     */
+    // 监听 url 参数，也就说当接口地址变化后，会重新请求接口
     useEffect(() => {
-        fetchData(url).then()
+        fetchData(url).then();
+    }, [url]);
+
+    // 下拉刷新
+    const onRefresh = useCallback(url => {
+        dispatch({type: 'refresh'});
+        fetchData(url).then();
     }, []);
 
-    /**
-     * 下拉刷新
-     * @type {(function(): Promise<void>)|*}
-     */
-    const onRefresh = useCallback(async (url) => {
-        setRefreshing(true);
-        await fetchData(url).then()
-        setRefreshing(false);
+    // 重新加载
+    const onReload = useCallback(url => {
+        dispatch({type: 'init'});
+        fetchData(url).then();
     }, []);
 
-    /**
-     * 重新加载数据
-     * @type {(function(*): Promise<void>)|*}
-     */
-    const onReload = useCallback(async (url) => {
-        setLoading(true);
-        await fetchData(url)
-    }, []);
+    // 返回这些内容，在调用的页面中可以读取、调用，或再次进行设置
+    return {...state, onRefresh, onReload, fetchData};
+};
 
-    return {loading, error, refreshing, data, onRefresh, onReload, fetchData,setData}
-}
-
-export default useFetchData
+export default useFetchData;

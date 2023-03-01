@@ -1,7 +1,7 @@
 import useFetchData from "../../../hooks/useFetchData";
 import Loading from "../../shared/Loading";
 import NetworkError from "../../shared/NetworkError";
-import {Image, StyleSheet, Text, View} from "react-native";
+import {Image, RefreshControl, StyleSheet, Text, View} from "react-native";
 import Entypo from '@expo/vector-icons/Entypo';
 
 
@@ -27,34 +27,39 @@ const Home = () => {
 
     return (
         <>
-            <View style={styles.box}>
-                <View style={styles.info}>
-                    <Entypo name="medal" size={24} color='white'/>
-                    <Text style={styles.infoText}>所有在线课程都可免费观看！</Text>
-                </View>
-                <View style={styles.user}>
-                    <Image style={styles.avatar} source={{uri: data?.user?.avatar}}></Image>
-                    <View style={styles.userInfo}>
-                        <Text>学籍编号 : {data?.user.id}</Text>
-                        <Text style={styles.free}>免费用户</Text>
+            <View style={styles.container}
+            >
+                <View>
+                    <View style={styles.info} refreshControl={<RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={() => onRefresh(url)}/>}>
+                        <Entypo name="medal" size={24} color='white'/>
+                        <Text style={styles.infoText}>所有在线课程都可免费观看！</Text>
                     </View>
-                </View>
-                <View style={styles.item}>
-                    <View style={styles.itemBox}>
-                        <Text style={styles.itemTitle}>用户名/邮箱</Text>
-                        <Text style={styles.itemInfo}>{data?.user?.username}</Text>
+                    <View style={styles.user}>
+                        <Image style={styles.avatar} source={{uri: data?.user?.avatar}}></Image>
+                        <View style={styles.userInfo}>
+                            <Text>学籍编号 : {data?.user.id}</Text>
+                            <Text style={styles.free}>免费用户</Text>
+                        </View>
                     </View>
-                    <View style={styles.itemBox}>
-                        <Text style={styles.itemTitle}>性别</Text>
-                        <Text style={styles.itemInfo}>{sex}</Text>
-                    </View>
-                    <View style={styles.itemBox}>
-                        <Text style={styles.itemTitle}>公司</Text>
-                        <Text style={styles.itemInfo}>{data?.user?.company}</Text>
-                    </View>
-                    <View style={styles.itemBox}>
-                        <Text style={styles.itemTitle}>自我介绍</Text>
-                        <Text style={styles.itemInfo}>{data?.user?.introduce}</Text>
+                    <View style={styles.item}>
+                        <View style={styles.itemBox}>
+                            <Text style={styles.itemTitle}>用户名/邮箱</Text>
+                            <Text style={styles.itemInfo}>{data?.user?.username}</Text>
+                        </View>
+                        <View style={styles.itemBox}>
+                            <Text style={styles.itemTitle}>性别</Text>
+                            <Text style={styles.itemInfo}>{sex}</Text>
+                        </View>
+                        <View style={styles.itemBox}>
+                            <Text style={styles.itemTitle}>公司</Text>
+                            <Text style={styles.itemInfo}>{data?.user?.company}</Text>
+                        </View>
+                        <View style={styles.itemBox}>
+                            <Text style={styles.itemTitle}>自我介绍</Text>
+                            <Text style={styles.itemInfo}>{data?.user?.introduce}</Text>
+                        </View>
                     </View>
                 </View>
             </View>
@@ -63,6 +68,10 @@ const Home = () => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+    },
     box: {
         flex: 1,
         backgroundColor: '#fff',
@@ -119,7 +128,8 @@ const styles = StyleSheet.create({
         width: 120
     },
     itemInfo: {
-        marginTop: 5
+        marginTop: 5,
+        width: 270
     }
 
 });

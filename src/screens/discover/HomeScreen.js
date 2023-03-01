@@ -4,7 +4,7 @@ import {
     ScrollView,
     StyleSheet,
 } from 'react-native';
-// import useFetchDataHook from '../../hooks/useFetchDataHook';
+// import useFetchData from '../../hooks/useFetchData';
 import useFetchData from "../../hooks/useFetchData";
 import Loading from '../../components/shared/Loading';
 import NetworkError from '../../components/shared/NetworkError';

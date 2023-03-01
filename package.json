@@ -19,7 +19,7 @@
     "clwy-expo-scrollable-tab-view": "^1.0.9",
     "clwy-expo-video-player": "^2.2.1",
     "expo": "~47.0.12",
-    "expo-av": "~13.0.2",
+    "expo-av": "~13.0.3",
     "expo-linear-gradient": "~12.0.1",
     "expo-navigation-bar": "~2.0.1",
     "expo-screen-orientation": "~5.0.1",

@@ -21,7 +21,6 @@ const Request = async (url, method = "GET", params) => {
                  */
                 body: params ? JSON.stringify(params) : "",
             })
-            console.log(312321, params)
             const responseJson = await response.json();
             resolve(responseJson.data);
         } catch (e) {

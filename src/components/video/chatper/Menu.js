@@ -15,17 +15,17 @@ const HomeScreen = (props) => {
     const {data, loading, error, onReload, refreshing, onRefresh} = useFetchData(url, {
         course: {}
     });
-    const renderItem = (item) => {
+    const renderItem = ({item}) => {
         return (
             <>
                 <TouchableHighlight
                     underlayColor="#ddd"
-                    onPress={() => onItemSelected(item.item.id)}
-                    key={item.item.id}
+                    onPress={() => onItemSelected(item.id, item.title)}
+                    key={item.id}
                 >
                     <View style={styles.item}>
                         <Feather name="play" size={18} color={Colors.primary} style={styles.icon}/>
-                        <Text style={styles.title}>{item.item.title}</Text>
+                        <Text style={styles.title}>{item.title}</Text>
                     </View>
                 </TouchableHighlight>
             </>

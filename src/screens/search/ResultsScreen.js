@@ -10,9 +10,8 @@ const ResultsScreen = ({route}) => {
     const searchParams = route?.params?.name
     const url = `/courses?name=${searchParams}`
     const navigation = useNavigation()
-    console.log(searchParams, 11111)
     const {data, loading, error, onReload, refreshing, onRefresh} = useFetchData(url
-        , {courses: {}}
+        , {courses: []}
     );
     if (loading) {
         return <Loading/>;

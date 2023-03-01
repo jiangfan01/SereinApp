@@ -67,7 +67,7 @@ const History = () => {
         setIsEnd(false)
         setMoreLoading(false)
         currentPage = 1
-        onRefresh(url).then()
+        onRefresh(url)
     }
 
     /**

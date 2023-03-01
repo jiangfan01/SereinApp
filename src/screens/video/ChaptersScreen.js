@@ -11,7 +11,7 @@ import SereinPlayer from "../../components/video/chatper/SereinPlayer."
 import useFetchData from "../../hooks/useFetchData";
 import Loading from "../../components/shared/Loading";
 import NetworkError from "../../components/shared/NetworkError";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import {WebView} from "react-native-webview";
 import Menu from "../../components/video/chatper/Menu";
 import SideMenu from "react-native-side-menu-updated";
@@ -20,17 +20,19 @@ import ProgressWebView from "../../components/shared/ProgressWebView";
 import Colors from "../../constants/Colors";
 import fechRequest from "../../utils/fechRequest";
 
-const ChaptersScreen = (props) => {
-    let url = `/chapters/${props.route.params.id}`
+const ChaptersScreen = ({route, navigation}) => {
+    let url = `/chapters/${route.params.id}`
     const {data, loading, error, onReload, refreshing, onRefresh, fetchData} = useFetchData(url, {
         chapter: {},
         chapters: []
     });
     const [chapterUrl, setChapterUrl] = useState()
-    const [webUrl, setWebUrl] = useState(`https://react.serein-jf.co/show_chapter/${props.route.params.id}`)
+    const [webUrl, setWebUrl] = useState(`https://react.serein-jf.co/show_chapter/${route.params.id}`)
     const [isOpen, setIsOpen] = useState(false);
     const courseId = data?.chapter?.courseId
-    const chapterId = props?.route?.params?.id
+    const chapterId = route?.params?.id
+    const {id, title} = route.params;
+    const [headerTitle, setHeaderTitle] = useState(title);
 
 
     // 展开左侧菜单
@@ -49,12 +51,19 @@ const ChaptersScreen = (props) => {
         history().then()
     }, [])
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: headerTitle
+        });
+    }, [navigation, headerTitle]);
+
+
     // 切换选择
-    const onItemSelected = item => {
+    const onItemSelected = (id, title) => {
+        setHeaderTitle(title);
         setIsOpen(false);
-        setWebUrl(`https://react.serein-jf.co/show_chapter/${item}`)
-        url = `/chapters/${item}`
-        fetchData(url).then()
+        setWebUrl(`https://react.serein-jf.co/show_chapter/${id}`)
+        url = `/chapters/${id}`
     };
 
     // 左侧菜单

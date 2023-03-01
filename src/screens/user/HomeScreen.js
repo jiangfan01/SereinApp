@@ -18,7 +18,7 @@ const HomeScreen = () => {
                 tabBarActiveTextColor={Colors.tabBarActiveText}
                 tabBarTextStyle={{fontWeight: '400'}}
             >
-                <Home tabLabel="我的主页"></Home>
+                <Home tabLabel="我的主页" ></Home>
                 <History tabLabel="观看历史"></History>
                 <Liked tabLabel="我的收藏"></Liked>
             </ScrollableTabView>

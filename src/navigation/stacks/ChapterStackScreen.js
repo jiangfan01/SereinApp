@@ -11,7 +11,6 @@ const ChapterStackScreen = () => {
                 ...CardOption(route, navigation),
             })}>
             <ChapterStack.Screen name="Chapters" component={ChaptersScreen} options={({route, navigation}) => ({
-                title: route.params.title,
                 headerTitleStyle: {
                     fontSize: 14,
                     color: 'black'
