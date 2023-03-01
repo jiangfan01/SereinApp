@@ -34,22 +34,25 @@ const ChaptersScreen = ({route, navigation}) => {
     const {id, title} = route.params;
     const [headerTitle, setHeaderTitle] = useState(title);
 
-
     // 展开左侧菜单
     const updateMenuState = menuState => {
         setIsOpen(menuState);
     };
 
     const history = async () => {
-        await fechRequest(`/histories`, "POST", {
+
+        const res = await fechRequest(`/histories`, "POST", {
             courseId,
             chapterId
         })
     }
 
     useEffect(() => {
-        history().then()
-    }, [])
+        // 有课程id在新增
+        if (courseId) {
+            history().then()
+        }
+    }, [courseId])
 
     useLayoutEffect(() => {
         navigation.setOptions({

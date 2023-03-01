@@ -24,7 +24,7 @@ const HomeScreen = () => {
             <Image style={styles.avatar} source={{uri: data?.user?.avatar}}></Image>
             <View style={styles.info}>
                 <Text style={{marginRight: 15}}>介绍</Text>
-                <Text>{data?.user?.introduce}</Text>
+                <Text>{data?.user?.signature}</Text>
             </View>
         </View>
     );
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     info: {
         flexDirection: "row",
         marginTop: 30,
-        borderBottomWidth:1,
-        borderColor:'#b7b7b7'
+        borderBottomWidth: 1,
+        borderColor: '#b7b7b7'
     }
 });
 

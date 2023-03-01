@@ -23,7 +23,6 @@ const Liked = () => {
     if (loading) {
         return <Loading/>;
     }
-    console.log(3213, data.courses)
     // 网络错误
     if (error) {
         return <NetworkError onReload={() => onReload(url)}/>;

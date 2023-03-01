@@ -92,7 +92,6 @@ const History = () => {
         )
     };
 
-
     return (
         <>
             <FlatList
